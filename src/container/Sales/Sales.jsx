@@ -491,81 +491,79 @@ const Sales = () => {
   };
   const invoiceRef = useRef();
   const onPrintInvoice = async (dataInInvoice) => {
+    console.time("onPrintInvoice"); // بدء القياس الزمني
     if (
       dataInInvoice // &&
       // Array.isArray(dataInInvoice.chosenItems) &&
       // dataInInvoice.chosenItems.length > 0
     ) {
       const invoiceId = invoiceRef.current;
-      const type = dataInInvoice.type;
-      invoiceId.innerHTML = `
-            <div dir="rtl" class="max-w-full">
-                <h1 class="text-center text-base font-bold mt-4">مبيعات المستخدم <br />${
-                  dataInInvoice.cashier_id
-                }</h1>
-                <div class="mt-4">
-                    <p class="text-gray-700"><strong>النوع:</strong> ${
-                      type === "IMPORTED"
-                        ? "سفري"
-                        : type === "LOCALLY"
-                        ? "محلي"
-                        : type === "FAMILY"
-                        ? "عوائل"
-                        : type === "DELIVERED"
-                        ? "توصيل"
-                        : type === "COMPANIES"
-                        ? "شركات"
-                        : null
-                    }</p>
-                    <p class="text-gray-700"><strong>رقم الطلبية:</strong> ${
-                      dataInInvoice.queue_number
-                    }</p>
-                    <p class="text-gray-700"><strong>الصافي:</strong> ${
-                      dataInInvoice.net_price
-                    }</p>
-                    <p class="text-gray-700"><strong>الضرائب:</strong> ${
-                      dataInInvoice.tax_price
-                    }</p>
-                    <p class="text-gray-700"><strong>الإجمالي:</strong> ${
-                      dataInInvoice.total_price
-                    }</p>
-                </div>
-                <table class="mt-2 w-full border-collapse border border-gray-300">
-                    <thead>
-                        <tr class="bg-gray-200">
-                            <th class="border border-gray-300 py-2 px-1 text-right">اسم المنتج</th>
-                            <th class="border border-gray-300 py-2 px-1 text-right">الكمية</th>
-                            <th class="border border-gray-300 py-2 px-1 text-right">السعر الكلي</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${dataInInvoice.chosenItems
-                          .map(
-                            (item) => `
-                            <tr>
-                                <td class="border border-gray-300 p-2">${item.name}</td>
-                                <td class="border border-gray-300 p-2">${item.quantity}</td>
-                                <td class="border border-gray-300 p-2">${item.totalPrice}</td>
-                            </tr>
-                        `
-                          )
-                          .join("")}
-                    </tbody>
-                </table>
-                <div class="mt-4 text-right">
-                    <p class="font-bold"><strong>المبلغ المدفوع:</strong> ${
-                      dataInInvoice.payements?.piece
-                    }</p>
-                    <p class="font-bold">${new Date(
-                      dataInInvoice.created_at
-                    ).toLocaleString("ar-DZ")}</p>
-                </div>
-            </div>
-        `;
+      // const type = dataInInvoice.type;
+      // invoiceId.innerHTML = `
+      //       <div dir="rtl" class="max-w-full">
+      //           <h1 class="text-center text-base font-bold mt-4">مبيعات المستخدم <br />${
+      //             dataInInvoice.cashier_id
+      //           }</h1>
+      //           <div class="mt-4">
+      //               <p class="text-gray-700"><strong>النوع:</strong> ${
+      //                 type === "IMPORTED"
+      //                   ? "سفري"
+      //                   : type === "LOCALLY"
+      //                   ? "محلي"
+      //                   : type === "FAMILY"
+      //                   ? "عوائل"
+      //                   : type === "DELIVERED"
+      //                   ? "توصيل"
+      //                   : type === "COMPANIES"
+      //                   ? "شركات"
+      //                   : null
+      //               }</p>
+      //               <p class="text-gray-700"><strong>رقم الطلبية:</strong> ${
+      //                 dataInInvoice.queue_number
+      //               }</p>
+      //               <p class="text-gray-700"><strong>الصافي:</strong> ${
+      //                 dataInInvoice.net_price
+      //               }</p>
+      //               <p class="text-gray-700"><strong>الضرائب:</strong> ${
+      //                 dataInInvoice.tax_price
+      //               }</p>
+      //               <p class="text-gray-700"><strong>الإجمالي:</strong> ${
+      //                 dataInInvoice.total_price
+      //               }</p>
+      //           </div>
+      //           <table class="mt-2 w-full border-collapse border border-gray-300">
+      //               <thead>
+      //                   <tr class="bg-gray-200">
+      //                       <th class="border border-gray-300 py-2 px-1 text-right">اسم المنتج</th>
+      //                       <th class="border border-gray-300 py-2 px-1 text-right">الكمية</th>
+      //                       <th class="border border-gray-300 py-2 px-1 text-right">السعر الكلي</th>
+      //                   </tr>
+      //               </thead>
+      //               <tbody>
+      //                   ${dataInInvoice.chosenItems
+      //                     .map(
+      //                       (item) => `
+      //                       <tr>
+      //                           <td class="border border-gray-300 p-2">${item.name}</td>
+      //                           <td class="border border-gray-300 p-2">${item.quantity}</td>
+      //                           <td class="border border-gray-300 p-2">${item.totalPrice}</td>
+      //                       </tr>
+      //                   `
+      //                     )
+      //                     .join("")}
+      //               </tbody>
+      //           </table>
+      //           <div class="mt-4 text-right">
+      //               <p class="font-bold"><strong>المبلغ المدفوع:</strong> ${
+      //                 dataInInvoice.payements?.piece
+      //               }</p>
+      //               <p class="font-bold">${new Date(
+      //                 dataInInvoice.created_at
+      //               ).toLocaleString("ar-DZ")}</p>
+      //           </div>
+      //       </div>
+      //   `;
       // get user
-      getUsers().then((data) => {
-        console.log(data);
-      });
       console.log("invoiceId", invoiceId);
       console.log("invData", dataInInvoice.chosenItems);
 
@@ -575,7 +573,7 @@ const Sales = () => {
 
       await pdf.save(fileName);
       await showSuccessAlert("تم حفظ الفاتورة");
-      window.location.reload();
+      // window.location.reload();
     } else {
       console.error(
         "chosenItems ليس مصفوفة أو أنه فارغ",
@@ -583,6 +581,7 @@ const Sales = () => {
       );
       showErrorAlert("chosenItems ليس مصفوفة أو أنه فارغ");
     }
+    console.timeEnd("onPrintInvoice"); // إنهاء القياس الزمني وعرض الزمن المستغرق
   };
 
   // if cashier is not open
@@ -638,7 +637,79 @@ const Sales = () => {
           ref={invoiceRef}
           id="inv"
           className="bg-white p-3 rounded-lg self-center w-[388px] text-[12px]"
-        ></div>
+        >
+          <div dir="rtl" class="max-w-full">
+            <h1 class="text-center text-base font-bold mt-4">
+              مبيعات المستخدم <br />${dataInInvoice.cashier_id}
+            </h1>
+            <div class="mt-4">
+              <p class="text-gray-700">
+                <strong>النوع:</strong> $
+                {orderType === "IMPORTED"
+                  ? "سفري"
+                  : type === "LOCALLY"
+                  ? "محلي"
+                  : type === "FAMILY"
+                  ? "عوائل"
+                  : type === "DELIVERED"
+                  ? "توصيل"
+                  : type === "COMPANIES"
+                  ? "شركات"
+                  : null}
+              </p>
+              <p class="text-gray-700">
+                <strong>رقم الطلبية:</strong> ${dataInInvoice.queue_number}
+              </p>
+              <p class="text-gray-700">
+                <strong>الصافي:</strong> ${dataInInvoice.net_price}
+              </p>
+              <p class="text-gray-700">
+                <strong>الضرائب:</strong> ${dataInInvoice.tax_price}
+              </p>
+              <p class="text-gray-700">
+                <strong>الإجمالي:</strong> ${dataInInvoice.total_price}
+              </p>
+            </div>
+            <table class="mt-2 w-full border-collapse border border-gray-300">
+              <thead>
+                <tr class="bg-gray-200">
+                  <th class="border border-gray-300 py-2 px-1 text-right">
+                    اسم المنتج
+                  </th>
+                  <th class="border border-gray-300 py-2 px-1 text-right">
+                    الكمية
+                  </th>
+                  <th class="border border-gray-300 py-2 px-1 text-right">
+                    السعر الكلي
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                $
+                {dataInInvoice.chosenItems && (dataInInvoice.chosenItems
+                  .map(
+                    (item) => `
+                            <tr>
+                                <td class="border border-gray-300 p-2">${item.name}</td>
+                                <td class="border border-gray-300 p-2">${item.quantity}</td>
+                                <td class="border border-gray-300 p-2">${item.totalPrice}</td>
+                            </tr>
+                        `
+                  )
+                  .join(""))}
+              </tbody>
+            </table>
+            <div class="mt-4 text-right">
+              <p class="font-bold">
+                <strong>المبلغ المدفوع:</strong> $
+                {dataInInvoice.payements?.piece}
+              </p>
+              <p class="font-bold">
+                ${new Date(dataInInvoice.created_at).toLocaleString("ar-DZ")}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="flex flex-col w-full h-full">
         <nav className="w-full flex flex-row justify-between items-end gap-x-1 p-1 mb-3 relative">
