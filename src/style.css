@@ -1,0 +1,19 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap'); */
+@font-face {
+    font-family: 'Readex Pro';
+     src: /*url('../src/assets/fonts/ReadexPro-Bold.ttf') format('truetype'), */
+         /* url('../src/assets/fonts/ReadexPro-ExtraLight.ttf') format('truetype'),
+         url('../src/assets/fonts/ReadexPro-Light.ttf') format('truetype'),
+         url('../src/assets/fonts/ReadexPro-Medium.ttf') format('truetype'),
+         url('../src/assets/fonts/ReadexPro-Regular.ttf') format('truetype'),
+         url('../src/assets/fonts/ReadexPro-SemiBold.ttf') format('truetype'), */
+         url('../src/assets/fonts/ReadexPro-VariableFont_HEXP\,wght.ttf') format('truetype');
+}
+
+* {
+    font-family: "Readex Pro", sans-serif;
+}
+
+* ::-webkit-scrollbar {
+   display: none;
+}
